@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.request-container {
+  width: 400px;
+  max-height: 400px;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.App-Container {
+  min-height: 100vh;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.button-submit {
+  width: 100px;
+}
+
+.container-form-selection {
+  width: 400px;
+}
+
+.container-form {
+  width: 600px;
+}
