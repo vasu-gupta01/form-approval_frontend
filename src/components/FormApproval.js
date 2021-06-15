@@ -49,16 +49,20 @@ function FormApproval(props) {
             if (res.data.date_submitted) {
               setFormDate(Moment(res.data.date_submitted).format("DD-MM-YYYY"));
             }
-
-            if (res.data.approval && res.data.approval.status === 0) {
-              setFormApproved(false);
-              setFormStatus(0);
-              console.log("Form not approved");
+            if (res.data.approval) {
+              if (res.data.approval.status === 0) {
+                setFormApproved(false);
+                setFormStatus(0);
+                console.log("Form not approved");
+              } else {
+                setFormApproved(true);
+                setFormStatus(res.data.approval.status);
+                setFormComments(res.data.approval.comments);
+                console.log("Form already approved!");
+              }
             } else {
-              setFormApproved(true);
-              setFormStatus(res.data.approval.status);
-              setFormComments(res.data.approval.comments);
-              console.log("Form already approved!");
+              setFormStatus(-1);
+              console.log("MOD");
             }
           }
         })
@@ -209,63 +213,67 @@ function FormApproval(props) {
                 </div>
               </div>
             </div>
-            {formApproved ? (
-              <div className="card-footer row">
-                <p className="lead m-2 text-center mb-3">
-                  This approval request was{" "}
-                  {formStatus === 1 ? (
-                    <strong className="text-success">approved </strong>
-                  ) : (
-                    <strong className="text-danger">disapproved </strong>
-                  )}
-                  by you.
-                </p>
-                <label className="col-sm-4 col-form-label mb-3">
-                  Comments:
-                </label>
-                <div className="col-sm-8">
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={formComments}
-                    readOnly
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="card-footer">
-                <div className="form-floating mb-3">
-                  <textarea
-                    className="form-control"
-                    placeholder="comments"
-                    id="floatingTextarea"
-                    style={{ height: "100px", "max-height": "100px" }}
-                    onChange={handleComments}
-                  ></textarea>
-                  <label className="text-muted" htmlFor="floatingTextarea">
-                    Leave a comment here
+            {formStatus != -1 ? (
+              formApproved ? (
+                <div className="card-footer row">
+                  <p className="lead m-2 text-center mb-3">
+                    This approval request was{" "}
+                    {formStatus === 1 ? (
+                      <strong className="text-success">approved </strong>
+                    ) : (
+                      <strong className="text-danger">disapproved </strong>
+                    )}
+                    by you.
+                  </p>
+                  <label className="col-sm-4 col-form-label mb-3">
+                    Comments:
                   </label>
+                  <div className="col-sm-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={formComments}
+                      readOnly
+                    />
+                  </div>
                 </div>
+              ) : (
+                <div className="card-footer">
+                  <div className="form-floating mb-3">
+                    <textarea
+                      className="form-control"
+                      placeholder="comments"
+                      id="floatingTextarea"
+                      style={{ height: "100px", "max-height": "100px" }}
+                      onChange={handleComments}
+                    ></textarea>
+                    <label className="text-muted" htmlFor="floatingTextarea">
+                      Leave a comment here
+                    </label>
+                  </div>
 
-                <div className="row">
-                  <div className="col-6 text-left">
-                    <button
-                      className="btn btn-outline-danger"
-                      onClick={handleDisapproval}
-                    >
-                      Disapprove
-                    </button>
-                  </div>
-                  <div className="col-6 text-end">
-                    <button
-                      className="btn btn-outline-success"
-                      onClick={handleApproval}
-                    >
-                      Approve
-                    </button>
+                  <div className="row">
+                    <div className="col-6 text-left">
+                      <button
+                        className="btn btn-outline-danger"
+                        onClick={handleDisapproval}
+                      >
+                        Disapprove
+                      </button>
+                    </div>
+                    <div className="col-6 text-end">
+                      <button
+                        className="btn btn-outline-success"
+                        onClick={handleApproval}
+                      >
+                        Approve
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )
+            ) : (
+              <div> MOD</div>
             )}
           </form>
         </div>

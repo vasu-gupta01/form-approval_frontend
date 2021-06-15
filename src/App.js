@@ -6,6 +6,7 @@ import AuthService from "./services/auth.service";
 
 import "./App.css";
 import Home from "./components/Home";
+import HomeMod from "./components/HomeMod";
 import FormApproval from "./components/FormApproval";
 import Login from "./components/Login";
 import Loading from "./components/Loading";
@@ -39,7 +40,15 @@ class App extends Component {
         </div>
       );
     } else {
-      return (
+      return currentUser.role.level === 3 ? (
+        <div className="">
+          <Switch>
+            <Route exact path="/" component={() => <HomeMod />} />
+            {/* <Route exact path="/home" component={() => <Home />} /> */}
+            <Route exact path="/form/:id" component={() => <FormApproval />} />
+          </Switch>
+        </div>
+      ) : (
         <div className="">
           <Switch>
             <Route exact path="/" component={() => <Home />} />

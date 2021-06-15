@@ -80,6 +80,12 @@ class Home extends Component {
               >
                 Home
               </button>
+              <button className="btn btn-outline-info ms-2">
+                Manage Users
+              </button>
+              <button className="btn btn-outline-info ms-2">
+                Review Approval Requests
+              </button>
               <button
                 className="btn btn-outline-danger ms-2"
                 onClick={() => {
@@ -92,13 +98,7 @@ class Home extends Component {
             </div>
           </nav>
         </div>
-        <div className="d-flex align-items-center justify-content-center">
-          <ApprovalRequestsList
-            forms={this.state.dbRequests}
-            handleShowAll={this.handleShowAll}
-            showAll={this.state.showAll}
-          />
-        </div>
+        <div className="d-flex align-items-center justify-content-center"></div>
       </div>
     );
   }
