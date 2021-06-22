@@ -8,6 +8,8 @@ import UserService from "../services/user.service";
 
 import "../App.css";
 import Loading from "./Loading";
+import { ExportToExcel } from "./ExportToExcel";
+import Moment from "moment";
 
 class Home extends Component {
   constructor(props) {
@@ -134,7 +136,10 @@ function ApprovalRequestsList(props) {
             ></input>
           </div>
           <div className="col-6 text-end">
-            <button className="btn btn-outline-success">Export to Excel</button>
+            <ExportToExcel
+              apiData={createExcelData(props.forms)}
+              fileName="myfile"
+            />
           </div>
         </div>
         <div className="list-group request-container overflow-auto">
@@ -186,6 +191,34 @@ function ApprovalRequestsList(props) {
   } else {
     return <Loading></Loading>;
   }
+}
+
+function createExcelData(forms) {
+  let return_data = [];
+
+  for (let f of forms) {
+    let app = [];
+    let dis = [];
+    for (let a of f.approval) {
+      if (a.status === 1) {
+        app.push(a.approver.firstname);
+      } else if (a.status === 2) {
+        dis.push(a.approver.firstname);
+      }
+    }
+
+    let obj = {
+      "Filled By": f.filled_by,
+      "Form Type": f.form.name,
+      "Approved By": "".concat(app),
+      "Dissaproved By": "".concat(dis),
+      "Date Filled": Moment(f.date_submitted).format("DD/MM/YYYY - h:mm A"),
+    };
+
+    return_data.push(obj);
+  }
+
+  return return_data;
 }
 
 function getApprovalStatuses(approval) {

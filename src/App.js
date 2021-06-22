@@ -16,7 +16,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentUser: undefined,
+      currentUser: null,
     };
   }
 
@@ -39,7 +39,7 @@ class App extends Component {
           <Login />
         </div>
       );
-    } else {
+    } else if (currentUser && currentUser.role.level) {
       return currentUser.role.level === 3 ? (
         <div className="">
           <Switch>

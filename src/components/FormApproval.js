@@ -47,7 +47,9 @@ function FormApproval(props) {
           if (res.data && isMounted) {
             setFormData(res.data);
             if (res.data.date_submitted) {
-              setFormDate(Moment(res.data.date_submitted).format("DD-MM-YYYY"));
+              setFormDate(
+                Moment(res.data.date_submitted).format("DD/MM/YYYY - h:mm A")
+              );
             }
             if (res.data.approval) {
               if (res.data.approval.status === 0) {
@@ -168,7 +170,7 @@ function FormApproval(props) {
                   />
                 </div>
               </div>
-              <div className="mb-3 row">
+              {/* <div className="mb-3 row">
                 <label className="col-sm-4 col-form-label">Department</label>
                 <div className="col-sm-8">
                   <input
@@ -178,7 +180,7 @@ function FormApproval(props) {
                     readOnly
                   />
                 </div>
-              </div>
+              </div> */}
               {formData.fields.map((field) => {
                 return (
                   <div key={"div_" + field._id} className="mb-3 row">
@@ -189,13 +191,25 @@ function FormApproval(props) {
                       {field.name}:
                     </label>
                     <div className="col-sm-8">
-                      <input
-                        key={field._id}
-                        type="text"
-                        className="form-control"
-                        value={field.value}
-                        readOnly
-                      />
+                      {field.name === "Time Out" ? (
+                        <input
+                          key={field._id}
+                          type="text"
+                          className="form-control"
+                          value={Moment(field.value).format(
+                            "DD/MM/YYYY - h:mm A"
+                          )}
+                          readOnly
+                        />
+                      ) : (
+                        <input
+                          key={field._id}
+                          type="text"
+                          className="form-control"
+                          value={field.value}
+                          readOnly
+                        />
+                      )}
                     </div>
                   </div>
                 );
