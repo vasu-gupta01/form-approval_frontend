@@ -11,6 +11,9 @@ import Loading from "./Loading";
 import ManageUsers from "./ManageUsers";
 import UserDetails from "./UserDetails";
 import Signup from "./Signup";
+import ManageRoles from "./mod/ManageRoles";
+import RoleCreate from "./mod/RoleCreate";
+import DepartmentCreate from "./mod/DepartmentCreate";
 
 class Home extends Component {
   constructor(props) {
@@ -98,13 +101,24 @@ class Home extends Component {
         </div>
         <div className="d-flex align-items-center justify-content-center">
           <Switch>
-            <Route exact path="/mod/users" component={() => <ManageUsers />} />
             <Route
               exact
               path="/mod/userdetails"
               component={() => <UserDetails />}
             />
             <Route exact path="/mod/signup" component={() => <Signup />} />
+            <Route exact path="/mod/users" component={() => <ManageUsers />} />
+            <Route exact path="/mod/roles" component={() => <ManageRoles />} />
+            <Route
+              exact
+              path="/mod/roles/create"
+              component={() => <RoleCreate />}
+            />
+            <Route
+              exact
+              path="/mod/roles/createdepartment"
+              component={() => <DepartmentCreate />}
+            />
           </Switch>
         </div>
       </div>
