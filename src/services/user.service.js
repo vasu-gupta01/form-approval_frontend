@@ -11,6 +11,16 @@ class UserService {
     });
   }
 
+  getUsers() {
+    return axios.get(API_URL + "getapprovers", {
+      headers: authHeader(),
+    });
+  }
+
+  getRoles() {
+    return axios.get(API_URL + "getroles", { headers: authHeader() });
+  }
+
   updateApproval(body) {
     return axios.post(API_URL + "updateapproval", body, {
       headers: authHeader(),

@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 // import api from "../utils/api";
 import AuthService from "../services/auth.service";
@@ -8,6 +8,9 @@ import UserService from "../services/user.service";
 
 import "../App.css";
 import Loading from "./Loading";
+import ManageUsers from "./ManageUsers";
+import UserDetails from "./UserDetails";
+import Signup from "./Signup";
 
 class Home extends Component {
   constructor(props) {
@@ -72,17 +75,12 @@ class Home extends Component {
               </p>
             </div>
             <div className="col text-end">
-              <button
-                className="btn btn-outline-light"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
+              <Link className="btn btn-outline-light" to="/">
                 Home
-              </button>
-              <button className="btn btn-outline-info ms-2">
-                Manage Users
-              </button>
+              </Link>
+              <Link to="/mod/users" className="btn btn-outline-info ms-2">
+                Manage Approvers
+              </Link>
               <button className="btn btn-outline-info ms-2">
                 Review Approval Requests
               </button>
@@ -90,7 +88,7 @@ class Home extends Component {
                 className="btn btn-outline-danger ms-2"
                 onClick={() => {
                   AuthService.logout();
-                  window.location.reload();
+                  window.location.replace("/");
                 }}
               >
                 Logout
@@ -98,7 +96,17 @@ class Home extends Component {
             </div>
           </nav>
         </div>
-        <div className="d-flex align-items-center justify-content-center"></div>
+        <div className="d-flex align-items-center justify-content-center">
+          <Switch>
+            <Route exact path="/mod/users" component={() => <ManageUsers />} />
+            <Route
+              exact
+              path="/mod/userdetails"
+              component={() => <UserDetails />}
+            />
+            <Route exact path="/mod/signup" component={() => <Signup />} />
+          </Switch>
+        </div>
       </div>
     );
   }

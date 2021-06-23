@@ -43,7 +43,7 @@ class App extends Component {
       return currentUser.role.level === 3 ? (
         <div className="">
           <Switch>
-            <Route exact path="/" component={() => <HomeMod />} />
+            <Route path="/" component={() => <HomeMod />} />
             {/* <Route exact path="/home" component={() => <Home />} /> */}
             <Route exact path="/form/:id" component={() => <FormApproval />} />
           </Switch>
