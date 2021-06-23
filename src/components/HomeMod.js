@@ -14,6 +14,7 @@ import Signup from "./Signup";
 import ManageRoles from "./mod/ManageRoles";
 import RoleCreate from "./mod/RoleCreate";
 import DepartmentCreate from "./mod/DepartmentCreate";
+import RoleDetails from "./mod/RoleDetails";
 
 class Home extends Component {
   constructor(props) {
@@ -105,6 +106,11 @@ class Home extends Component {
               exact
               path="/mod/userdetails"
               component={() => <UserDetails />}
+            />
+            <Route
+              exact
+              path="/mod/role/details"
+              component={() => <RoleDetails />}
             />
             <Route exact path="/mod/signup" component={() => <Signup />} />
             <Route exact path="/mod/users" component={() => <ManageUsers />} />

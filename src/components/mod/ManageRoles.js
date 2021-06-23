@@ -51,7 +51,7 @@ function RolesList(props) {
             .map((data) => {
               return (
                 <Link
-                  to={{ pathname: "/mod/userdetails", state: { role: data } }}
+                  to={{ pathname: "/mod/role/details", state: { role: data } }}
                   className="list-group-item list-group-item-action"
                   key={"Link_" + data._id}
                 >

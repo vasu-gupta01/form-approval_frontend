@@ -37,6 +37,12 @@ class UserService {
     });
   }
 
+  updateRole(body) {
+    return axios.post(API_URL + "role/update", body, {
+      headers: authHeader(),
+    });
+  }
+
   createRole(body) {
     return axios.post(API_URL + "createrole", body, {
       headers: authHeader(),
