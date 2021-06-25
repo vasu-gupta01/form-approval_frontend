@@ -117,15 +117,19 @@ class Home extends Component {
             </div>
           </nav>
         </div>
+        <div className="container d-flex align-items-center justify-content-center">
+          <DateRange
+            fromDate={this.state.fromDate}
+            toDate={this.state.toDate}
+            handleDateChange={this.handleDateChange}
+            setDateChange={this.setDateChange}
+          />
+        </div>
         <div className="d-flex align-items-center justify-content-center">
           <ApprovalRequestsList
             forms={this.state.dbRequests}
             handleShowAll={this.handleShowAll}
             showAll={this.state.showAll}
-            fromDate={this.state.fromDate}
-            toDate={this.state.toDate}
-            handleDateChange={this.handleDateChange}
-            setDateChange={this.setDateChange}
           />
         </div>
       </div>
@@ -195,12 +199,6 @@ function ApprovalRequestsList(props) {
   if (props.forms) {
     return props.forms.length !== 0 ? (
       <div>
-        <DateRange
-          fromDate={props.fromDate}
-          toDate={props.toDate}
-          handleDateChange={props.handleDateChange}
-          setDateChange={props.setDateChange}
-        />
         <div className="row mb-3 ms-1 me-1 mt-5">
           <div className="form-check form-switch col-6">
             <label
