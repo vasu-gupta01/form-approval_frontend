@@ -11,8 +11,8 @@ class UserService {
     });
   }
 
-  getApprovalRequests() {
-    return axios.get(API_URL + "getapprovalrequests", {
+  getApprovalRequests(body) {
+    return axios.post(API_URL + "getapprovalrequests", body, {
       headers: authHeader(),
     });
   }
