@@ -28,7 +28,7 @@ function UsersList(props) {
       <div>
         <div className="row mb-3">
           <div className="col-12 text-light">
-            <h4>Manage Users</h4>
+            <h4>Manage Approvers</h4>
           </div>
 
           <div className="col">

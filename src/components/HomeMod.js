@@ -86,7 +86,7 @@ class Home extends Component {
                 Manage Approvers
               </Link>
               <button className="btn btn-outline-info ms-2">
-                Review Approval Requests
+                Manage Forms
               </button>
               <button
                 className="btn btn-outline-danger ms-2"

@@ -5,6 +5,12 @@ import config from "../config/config";
 const API_URL = "/api/";
 
 class UserService {
+  getDateRequests(body) {
+    return axios.post(API_URL + "dashapprovalrequests", body, {
+      headers: authHeader(),
+    });
+  }
+
   getApprovalRequests() {
     return axios.get(API_URL + "getapprovalrequests", {
       headers: authHeader(),
