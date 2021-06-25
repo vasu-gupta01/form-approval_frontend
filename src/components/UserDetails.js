@@ -105,40 +105,50 @@ function UserDetails(props) {
               />
             </div>
           </div>
-          <div className="mb-3 row">
-            <label className="col-sm-4 col-form-label">Username:</label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                className="form-control"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-              />
+          {user.role.name == "mod" ? (
+            ""
+          ) : (
+            <div className="mb-3 row">
+              <label className="col-sm-4 col-form-label">Username:</label>
+              <div className="col-sm-8">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          <div className="mb-3 row">
-            <label className="col-sm-4 col-form-label">Role:</label>
-            <div className="col-sm-8">
-              <select
-                type="text"
-                className="form-select"
-                value={role}
-                onChange={(e) => {
-                  setRole(e.target.value);
-                }}
-              >
-                {roles.map((role) => {
-                  return (
-                    <option value={role._id}>
-                      {role.name} - {role.description}
-                    </option>
-                  );
-                })}
-              </select>
+          )}
+
+          {user.role.name === "mod" ? (
+            ""
+          ) : (
+            <div className="mb-3 row">
+              <label className="col-sm-4 col-form-label">Role:</label>
+              <div className="col-sm-8">
+                <select
+                  type="text"
+                  className="form-select"
+                  value={role}
+                  onChange={(e) => {
+                    setRole(e.target.value);
+                  }}
+                >
+                  {roles.map((role) => {
+                    return (
+                      <option value={role._id}>
+                        {role.name} - {role.description}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </div>
-          </div>
+          )}
+
           <div className="mb-3 row">
             <label className="col-sm-4 col-form-label">New Password:</label>
             <div

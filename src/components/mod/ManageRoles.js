@@ -49,21 +49,26 @@ function RolesList(props) {
             .slice(0)
             .reverse()
             .map((data) => {
-              return (
-                <Link
-                  to={{ pathname: "/mod/role/details", state: { role: data } }}
-                  className="list-group-item list-group-item-action"
-                  key={"Link_" + data._id}
-                >
-                  <div
-                    className="d-flex w-100 justify-content-between"
-                    key={"div_" + data._id}
-                  ></div>
-                  <h5>{data.description}</h5>
-                  <p className="mb-2">Type: {data.name}</p>
-                  <p className="mb-2">Access Level: {data.level}</p>
-                </Link>
-              );
+              if (data.name !== "mod") {
+                return (
+                  <Link
+                    to={{
+                      pathname: "/mod/role/details",
+                      state: { role: data },
+                    }}
+                    className="list-group-item list-group-item-action"
+                    key={"Link_" + data._id}
+                  >
+                    <div
+                      className="d-flex w-100 justify-content-between"
+                      key={"div_" + data._id}
+                    ></div>
+                    <h5>{data.description}</h5>
+                    <p className="mb-2">Type: {data.name}</p>
+                    <p className="mb-2">Access Level: {data.level}</p>
+                  </Link>
+                );
+              }
             })}
         </div>
       </div>

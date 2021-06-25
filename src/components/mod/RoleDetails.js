@@ -113,25 +113,32 @@ function RoleDetails(props) {
               </select>
             </div>
           </div>
-          <div className="mb-3 row">
-            <label className="col-sm-4 col-form-label">Access Level:</label>
-            <div className="col-sm-8">
-              <select
-                type="text"
-                className="form-select"
-                value={level}
-                onChange={(e) => {
-                  setLevel(e.target.value);
-                }}
-              >
-                <option value="0">level 0 -- only view</option>
-                <option value="1">
-                  level 1 -- view/approve only department requests
-                </option>
-                <option value="2">level 2 -- view/approve all requests</option>
-              </select>
+          {role.name === "mod" ? (
+            ""
+          ) : (
+            <div className="mb-3 row">
+              <label className="col-sm-4 col-form-label">Access Level:</label>
+              <div className="col-sm-8">
+                <select
+                  type="text"
+                  className="form-select"
+                  value={level}
+                  onChange={(e) => {
+                    setLevel(e.target.value);
+                  }}
+                >
+                  <option value="0">level 0 -- only view</option>
+                  <option value="1">
+                    level 1 -- view/approve only department requests
+                  </option>
+                  <option value="2">
+                    level 2 -- view/approve all requests
+                  </option>
+                </select>
+              </div>
             </div>
-          </div>
+          )}
+
           {error ? (
             <strong className="text-danger mt-2">
               Error submitting request. Check connection.
