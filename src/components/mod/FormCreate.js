@@ -197,6 +197,7 @@ class FormCreate extends Component {
                 />
               </div>
             </div>
+
             <FormFieldsEdit
               fields={this.state.fields}
               fieldTypes={this.state.fieldTypes}
@@ -311,6 +312,78 @@ function FormFieldsEdit(props) {
   return (
     <div className="mb-3 row">
       <label className="col-sm-2 col-form-label">Fields:</label>{" "}
+      <div className="row m-1 form-text">
+        <div className="form-floating col-5 mb-1 ps-1">
+          <input
+            className="form-control"
+            type="text"
+            value="Employee Name"
+            placeholder="Field Name"
+            id="inputFieldName"
+            disabled
+          />
+          <label htmlFor="inputFieldName">Field Name</label>
+        </div>
+        <div className="form-floating col-3 mb-1 ps-1">
+          <select
+            className="form-select"
+            type="text"
+            id="selectFieldTypes"
+            disabled
+          >
+            <option selected>Text</option>
+          </select>
+          <label htmlFor="selectFieldTypes">Field Type</label>
+        </div>
+        <div className="form-check form-switch col-2 m-auto">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            id="flexSwitchCheckDefault"
+            checked={true}
+            disabled
+          />
+          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+            Required
+          </label>
+        </div>
+      </div>
+      <div className="row m-1 form-text">
+        <div className="form-floating col-5 mb-1 ps-1">
+          <input
+            className="form-control"
+            type="text"
+            value="Department"
+            placeholder="Field Name"
+            id="inputFieldName"
+            disabled
+          />
+          <label htmlFor="inputFieldName">Field Name</label>
+        </div>
+        <div className="form-floating col-3 mb-1 ps-1">
+          <select
+            className="form-select"
+            type="text"
+            id="selectFieldTypes"
+            disabled
+          >
+            <option selected>Dropdown</option>
+          </select>
+          <label htmlFor="selectFieldTypes">Field Type</label>
+        </div>
+        <div className="form-check form-switch col-2 m-auto">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            id="flexSwitchCheckDefault"
+            checked={true}
+            disabled
+          />
+          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+            Required
+          </label>
+        </div>
+      </div>
       {Object.keys(fields).map((id) => {
         return (
           <div className="row m-1 form-text">
