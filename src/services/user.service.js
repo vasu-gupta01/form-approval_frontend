@@ -23,6 +23,12 @@ class UserService {
     });
   }
 
+  getApprovers() {
+    return axios.get(API_URL + "getapproverswithoutmod", {
+      headers: authHeader(),
+    });
+  }
+
   getRoles() {
     return axios.get(API_URL + "getroles", { headers: authHeader() });
   }
@@ -61,10 +67,26 @@ class UserService {
     });
   }
 
+  createForm(body) {
+    return axios.post(API_URL + "createform", body, { headers: authHeader() });
+  }
+
   getApprovalRequest(body) {
     return axios.post(API_URL + "getapprovalrequest", body, {
       headers: authHeader(),
     });
+  }
+
+  getForms() {
+    return axios.get(API_URL + "getforms", { headers: authHeader() });
+  }
+
+  getFieldTypes() {
+    return axios.get(API_URL + "getfieldtypes", { headers: authHeader() });
+  }
+
+  updateForm(body) {
+    return axios.post(API_URL + "updateform", body, { headers: authHeader() });
   }
 }
 

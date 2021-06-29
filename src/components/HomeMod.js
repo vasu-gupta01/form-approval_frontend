@@ -15,6 +15,9 @@ import ManageRoles from "./mod/ManageRoles";
 import RoleCreate from "./mod/RoleCreate";
 import DepartmentCreate from "./mod/DepartmentCreate";
 import RoleDetails from "./mod/RoleDetails";
+import ManageForms from "./mod/ManageForms";
+import FormDetails from "./mod/FormDetails";
+import FormCreate from "./mod/FormCreate";
 
 class Home extends Component {
   constructor(props) {
@@ -85,9 +88,9 @@ class Home extends Component {
               <Link to="/mod/users" className="btn btn-outline-info ms-2">
                 Manage Approvers
               </Link>
-              <button className="btn btn-outline-info ms-2">
+              <Link to="/mod/forms" className="btn btn-outline-info ms-2">
                 Manage Forms
-              </button>
+              </Link>
               <button
                 className="btn btn-outline-danger ms-2"
                 onClick={() => {
@@ -115,6 +118,8 @@ class Home extends Component {
             <Route exact path="/mod/signup" component={() => <Signup />} />
             <Route exact path="/mod/users" component={() => <ManageUsers />} />
             <Route exact path="/mod/roles" component={() => <ManageRoles />} />
+            <Route exact path="/mod/forms" component={() => <ManageForms />} />
+
             <Route
               exact
               path="/mod/roles/create"
@@ -122,8 +127,18 @@ class Home extends Component {
             />
             <Route
               exact
+              path="/mod/form/details"
+              component={() => <FormDetails />}
+            />
+            <Route
+              exact
               path="/mod/roles/createdepartment"
               component={() => <DepartmentCreate />}
+            />
+            <Route
+              exact
+              path="/mod/forms/create"
+              component={() => <FormCreate />}
             />
           </Switch>
         </div>
