@@ -17,6 +17,24 @@ function ManageRoles(props) {
 
   return (
     <div className="mt-2">
+      <div className="row mb-3">
+        <div className="col-12 text-light">
+          <h4>Roles</h4>
+        </div>
+        <div className="col-4">
+          <Link to="/mod/roles/create" className="btn btn-outline-light">
+            + Add role
+          </Link>
+        </div>
+        <div className="col-6">
+          <Link
+            to="/mod/roles/createdepartment"
+            className="btn btn-outline-light"
+          >
+            + Add department
+          </Link>
+        </div>
+      </div>
       <RolesList roles={roles} />
     </div>
   );
@@ -26,24 +44,6 @@ function RolesList(props) {
   if (props.roles) {
     return props.roles.length !== 0 ? (
       <div>
-        <div className="row mb-3">
-          <div className="col-12 text-light">
-            <h4>Roles</h4>
-          </div>
-          <div className="col-4">
-            <Link to="/mod/roles/create" className="btn btn-outline-light">
-              + Add role
-            </Link>
-          </div>
-          <div className="col-6">
-            <Link
-              to="/mod/roles/createdepartment"
-              className="btn btn-outline-light"
-            >
-              + Add department
-            </Link>
-          </div>
-        </div>
         <div className="list-group request-container overflow-auto">
           {props.roles
             .slice(0)

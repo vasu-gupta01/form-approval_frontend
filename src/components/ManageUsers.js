@@ -17,6 +17,22 @@ function ManageUsers(props) {
 
   return (
     <div className="mt-2">
+      <div className="row mb-3">
+        <div className="col-12 text-light">
+          <h4>Manage Approvers</h4>
+        </div>
+
+        <div className="col">
+          <Link to="/mod/signup" className="btn btn-outline-light">
+            + Add approver
+          </Link>
+        </div>
+        <div className="col">
+          <Link to="/mod/roles" className="btn btn-outline-light">
+            Manage Roles
+          </Link>
+        </div>
+      </div>
       <UsersList users={users} />
     </div>
   );
@@ -26,22 +42,6 @@ function UsersList(props) {
   if (props.users) {
     return props.users.length !== 0 ? (
       <div>
-        <div className="row mb-3">
-          <div className="col-12 text-light">
-            <h4>Manage Approvers</h4>
-          </div>
-
-          <div className="col">
-            <Link to="/mod/signup" className="btn btn-outline-light">
-              + Add approver
-            </Link>
-          </div>
-          <div className="col">
-            <Link to="/mod/roles" className="btn btn-outline-light">
-              Manage Roles
-            </Link>
-          </div>
-        </div>
         <div className="list-group request-container overflow-auto">
           {props.users
             .slice(0)

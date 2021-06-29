@@ -18,6 +18,16 @@ function ManageForms(props) {
 
   return (
     <div className="mt-2">
+      <div className="row mb-3">
+        <div className="col-12 text-light">
+          <h4>Manage Forms</h4>
+        </div>
+        <div className="col-4">
+          <Link to="/mod/forms/create" className="btn btn-outline-light">
+            + Add form
+          </Link>
+        </div>
+      </div>
       <FormsList forms={forms} />
     </div>
   );
@@ -27,16 +37,6 @@ function FormsList(props) {
   if (props.forms) {
     return props.forms.length !== 0 ? (
       <div>
-        <div className="row mb-3">
-          <div className="col-12 text-light">
-            <h4>Forms</h4>
-          </div>
-          <div className="col-4">
-            <Link to="/mod/forms/create" className="btn btn-outline-light">
-              + Add form
-            </Link>
-          </div>
-        </div>
         <div className="list-group request-container overflow-auto">
           {props.forms
             .slice(0)
