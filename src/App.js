@@ -36,7 +36,7 @@ class App extends Component {
 
     if (!currentUser) {
       return (
-        <div className="App-Container container align-items-center justify-content-center">
+        <div className="container align-items-center justify-content-center">
           <Switch>
             <Route path="/" component={() => <Login />} />
           </Switch>
@@ -44,7 +44,7 @@ class App extends Component {
       );
     } else if (currentUser && currentUser.role.level === 4) {
       return (
-        <div className="">
+        <div>
           <div className="container-fluid">
             <nav className="row navbar navbar-light bg-dark rounded shadow-lg">
               <div className="col-4">
@@ -81,7 +81,7 @@ class App extends Component {
             <Route path="/" component={() => <HomeMod />} />
             <Route exact path="/form/:id" component={() => <FormApproval />} />
           </Switch>
-          <div className="App-Container container align-items-center justify-content-center">
+          <div className="container align-items-center justify-content-center">
             <Switch>
               <Route
                 exact
@@ -118,7 +118,7 @@ class App extends Component {
               </div>
             </nav>
           </div>
-          <div className="App-Container container align-items-center justify-content-center">
+          <div className="container align-items-center justify-content-center">
             <Switch>
               <Route exact path="/" component={() => <Dashboard />}></Route>
             </Switch>
@@ -127,7 +127,7 @@ class App extends Component {
       );
     } else if (currentUser && currentUser.role.level) {
       return (
-        <div className="">
+        <div>
           <div className="container-fluid">
             <nav className="row navbar navbar-light bg-dark rounded shadow-lg">
               <div className="col-4">
@@ -160,7 +160,7 @@ class App extends Component {
 
             <Route exact path="/form/:id" component={() => <FormApproval />} />
           </Switch>
-          <div className="App-Container container align-items-center justify-content-center">
+          <div className="container align-items-center justify-content-center">
             <Switch>
               <Route
                 exact

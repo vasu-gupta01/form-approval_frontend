@@ -74,46 +74,44 @@ class Home extends Component {
     const { currentUser } = this.state;
 
     return (
-      <div>
-        <div className="d-flex align-items-center justify-content-center">
-          <Switch>
-            <Route
-              exact
-              path="/mod/userdetails"
-              component={() => <UserDetails />}
-            />
-            <Route
-              exact
-              path="/mod/role/details"
-              component={() => <RoleDetails />}
-            />
-            <Route exact path="/mod/signup" component={() => <Signup />} />
-            <Route exact path="/mod/users" component={() => <ManageUsers />} />
-            <Route exact path="/mod/roles" component={() => <ManageRoles />} />
-            <Route exact path="/mod/forms" component={() => <ManageForms />} />
+      <div className="d-flex align-items-center justify-content-center">
+        <Switch>
+          <Route
+            exact
+            path="/mod/userdetails"
+            component={() => <UserDetails />}
+          />
+          <Route
+            exact
+            path="/mod/role/details"
+            component={() => <RoleDetails />}
+          />
+          <Route exact path="/mod/signup" component={() => <Signup />} />
+          <Route exact path="/mod/users" component={() => <ManageUsers />} />
+          <Route exact path="/mod/roles" component={() => <ManageRoles />} />
+          <Route exact path="/mod/forms" component={() => <ManageForms />} />
 
-            <Route
-              exact
-              path="/mod/roles/create"
-              component={() => <RoleCreate />}
-            />
-            <Route
-              exact
-              path="/mod/form/details"
-              component={() => <FormDetails />}
-            />
-            <Route
-              exact
-              path="/mod/roles/createdepartment"
-              component={() => <DepartmentCreate />}
-            />
-            <Route
-              exact
-              path="/mod/forms/create"
-              component={() => <FormCreate />}
-            />
-          </Switch>
-        </div>
+          <Route
+            exact
+            path="/mod/roles/create"
+            component={() => <RoleCreate />}
+          />
+          <Route
+            exact
+            path="/mod/form/details"
+            component={() => <FormDetails />}
+          />
+          <Route
+            exact
+            path="/mod/roles/createdepartment"
+            component={() => <DepartmentCreate />}
+          />
+          <Route
+            exact
+            path="/mod/forms/create"
+            component={() => <FormCreate />}
+          />
+        </Switch>
       </div>
     );
   }
