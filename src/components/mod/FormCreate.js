@@ -16,6 +16,9 @@ class FormCreate extends Component {
       final_approvers: {},
       list_of_approvers: [],
       counter: 0,
+      level_one: 1,
+      level_two: 2,
+      level_three: 3,
     };
 
     this.handleCreate = this.handleCreate.bind(this);
@@ -141,10 +144,17 @@ class FormCreate extends Component {
         }
       });
 
+      let stages = { 1: [], 2: [], 3: [] };
+
+      stages[this.state.level_one].push(1);
+      stages[this.state.level_two].push(2);
+      stages[this.state.level_three].push(3);
+
       UserService.createForm({
         name: nm,
         fields: fields_array,
         finals: approvers_array,
+        stages: stages,
       }).then(
         () => {
           this.setState({ clicked_create: false });
@@ -186,8 +196,11 @@ class FormCreate extends Component {
           </div>
           <div className="card-body">
             <div className="mb-3 row">
-              <label className="col-sm-4 col-form-label">Form Title:</label>
-              <div className="col-sm-8">
+              <div className="col-3 m-auto">
+                <strong>Form Title:</strong>
+              </div>
+
+              <div className="col-9 m-auto">
                 <input
                   type="text"
                   className="form-control"
@@ -216,37 +229,100 @@ class FormCreate extends Component {
                 </button>
               </div>
             </div>
+
             <div className="mb-3 row">
-              <label className="col-sm-4 col-form-label">
-                Final Approvers:
-              </label>
+              <strong className="col-5 ">Select stages of approval:</strong>
               <div className="mb-3 row text-center m-1">
-                {this.state.list_of_approvers.map((app) => {
-                  return (
-                    <div className="form-check col-6 text-start">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        checked={this.state.final_approvers[app._id]}
-                        id="flexCheckDefault"
-                        onChange={(e) =>
-                          this.handleAddFinalApprover(e, app._id)
-                        }
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="flexCheckDefault"
-                      >
-                        {app.firstname +
-                          " " +
-                          app.lastname +
-                          " - " +
-                          app.role.description}
-                      </label>
-                    </div>
-                  );
-                })}
+                <div className="col-6 text-start mb-2">
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefault"
+                  >
+                    Access Level 1 - Department Only
+                  </label>
+                  <select
+                    value={this.state.level_one}
+                    className="form-select"
+                    onChange={(e) => {
+                      this.setState({ level_one: e.target.value });
+                    }}
+                  >
+                    <option selected value="1">
+                      First Stage
+                    </option>
+                    <option value="2">Second Stage</option>
+                    <option value="3">Third Stage</option>
+                  </select>
+                </div>
+                <div className="col-6 text-start mb-2">
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefault"
+                  >
+                    Access Level 2 - All Approvals
+                  </label>
+                  <select
+                    value={this.state.level_two}
+                    className="form-select"
+                    onChange={(e) => {
+                      this.setState({ level_two: e.target.value });
+                    }}
+                  >
+                    <option value="1">First Stage</option>
+                    <option value="2">Second Stage</option>
+                    <option value="3">Third Stage</option>
+                  </select>
+                </div>
+                <div className="col-6 text-start">
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefault"
+                  >
+                    Level 3 - All Approvals
+                  </label>
+                  <select
+                    value={this.state.level_three}
+                    className="form-select"
+                    onChange={(e) => {
+                      this.setState({ level_three: e.target.value });
+                    }}
+                  >
+                    <option value="1">First Stage</option>
+                    <option value="2">Second Stage</option>
+                    <option value="3">Third Stage</option>
+                  </select>
+                </div>
               </div>
+            </div>
+
+            <div className="mb-3 row m-auto">
+              <strong className="col-12 ">Select final approvers:</strong>
+
+              {this.state.list_of_approvers.map((app) => {
+                return (
+                  <div className="form-check m-1" key={app._id}>
+                    <input
+                      key={"input_" + app._id}
+                      className="form-check-input"
+                      type="checkbox"
+                      checked={this.state.final_approvers[app._id]}
+                      id={"flexCheckDefault" + app._id}
+                      onChange={(e) => this.handleAddFinalApprover(e, app._id)}
+                    />
+                    <label
+                      key={"label_" + app._id}
+                      className="form-check-label"
+                      htmlFor={"flexCheckDefault" + app._id}
+                    >
+                      {app.firstname +
+                        " " +
+                        app.lastname +
+                        " - " +
+                        app.role.description}
+                    </label>
+                  </div>
+                );
+              })}
             </div>
 
             {this.state.error ? (
@@ -257,7 +333,9 @@ class FormCreate extends Component {
               ""
             )}
             {this.state.field_missing ? (
-              <strong className="text-danger">Name field is required.</strong>
+              <strong className="text-danger">
+                Form Title field is required.
+              </strong>
             ) : (
               ""
             )}
@@ -289,29 +367,14 @@ function FormFieldsEdit(props) {
 
   useEffect(() => {
     setFields(props.fields);
-
-    // let field_checked = {};
-    // for (let field of Object.keys(props.fields)) {
-    //   if (fields[field]) {
-    //     field_checked[field] = fields[field].required;
-    //   }
-    // }
-
-    // setFieldChecked(field_checked);
   }, [props.fields]);
-
-  // let handleRequiredChange = (e, field_id) => {
-  //   let current_field_checked = fieldChecked;
-  //   const value = !current_field_checked[field_id];
-
-  //   current_field_checked[field_id] = value;
-
-  //   setFieldChecked({ ...fieldChecked });
-  // };
 
   return (
     <div className="mb-3 row">
-      <label className="col-sm-2 col-form-label">Fields:</label>{" "}
+      <div className="col-12 m-auto mb-2">
+        <strong>Fields:</strong>
+      </div>
+
       <div className="row m-1 form-text">
         <div className="form-floating col-5 mb-1 ps-1">
           <input

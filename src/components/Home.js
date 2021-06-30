@@ -89,34 +89,6 @@ class Home extends Component {
 
     return (
       <div>
-        <div className="container-fluid">
-          <nav className="row navbar navbar-light bg-dark rounded shadow-lg">
-            <div className="col-4">
-              <p className="navbar-brand text-light mt-1">
-                Welcome, {AuthService.getCurrentUser().firstname}!
-              </p>
-            </div>
-            <div className="col text-end">
-              <button
-                className="btn btn-outline-light"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                Home
-              </button>
-              <button
-                className="btn btn-outline-danger ms-2"
-                onClick={() => {
-                  AuthService.logout();
-                  window.location.reload();
-                }}
-              >
-                Logout
-              </button>
-            </div>
-          </nav>
-        </div>
         <div className="container d-flex align-items-center justify-content-center">
           <DateRange
             fromDate={this.state.fromDate}

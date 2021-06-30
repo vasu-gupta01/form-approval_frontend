@@ -196,7 +196,7 @@ function ApprovalRequestsDisplay(props) {
                     <p className="card-text text-muted">
                       Form Type: {form.form.name}
                     </p>
-                    <p className="card-text">
+                    <div className="card-text">
                       {form.final_approval === 1 ? (
                         <h4>
                           <span className="badge rounded-pill mb-1 me-2 bg-success">
@@ -210,7 +210,7 @@ function ApprovalRequestsDisplay(props) {
                           </span>
                         </h4>
                       )}
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -54,13 +54,6 @@ class Login extends Component {
   render() {
     return (
       <div className="row justify-content-center mt-5">
-        <div className="row justify-content-center text-center">
-          <div className="col mb-5">
-            <Link to="/dashboard" className="btn btn-outline-warning btn-lg">
-              Status Dashboard
-            </Link>
-          </div>
-        </div>
         <div className="container-form ">
           <form
             className="card bg-light bg-gradient"

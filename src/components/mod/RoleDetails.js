@@ -128,12 +128,9 @@ function RoleDetails(props) {
                   }}
                 >
                   <option value="0">level 0 -- only view</option>
-                  <option value="1">
-                    level 1 -- view/approve only department requests
-                  </option>
-                  <option value="2">
-                    level 2 -- view/approve all requests
-                  </option>
+                  <option value="1">level 1 -- HOD</option>
+                  <option value="2">level 2 -- HR</option>
+                  <option value="3">level 3 -- HOD + Final</option>
                 </select>
               </div>
             </div>

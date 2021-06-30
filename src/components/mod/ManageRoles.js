@@ -31,7 +31,7 @@ function ManageRoles(props) {
             to="/mod/roles/createdepartment"
             className="btn btn-outline-light"
           >
-            + Add department
+            Manage Departments
           </Link>
         </div>
       </div>

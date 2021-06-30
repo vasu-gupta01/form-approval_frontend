@@ -119,33 +119,6 @@ function FormApproval(props) {
     <Loading />
   ) : (
     <div className="container-fluid">
-      <nav className="row navbar navbar-light bg-dark rounded shadow-lg">
-        <div className="col-4 text-light">
-          <p className="navbar-brand text-light mt-1">
-            Welcome, {AuthService.getCurrentUser().firstname}!
-          </p>
-        </div>
-        <div className="col text-end">
-          <button
-            className="btn btn-outline-light"
-            onClick={() => {
-              history.push("/");
-            }}
-          >
-            Home
-          </button>
-          <button
-            className="btn btn-outline-danger ms-2"
-            onClick={() => {
-              AuthService.logout();
-              history.push("/");
-              window.location.reload();
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      </nav>
       <div className="container d-flex align-items-center justify-content-center mt-5">
         <div className="container-form">
           <form className="card bg-light bg-gradient">
@@ -191,7 +164,7 @@ function FormApproval(props) {
                       {field.name}:
                     </label>
                     <div className="col-sm-8">
-                      {field.name === "Time Out" ? (
+                      {field.type.name === "time" ? (
                         <input
                           key={field._id}
                           type="text"
@@ -287,7 +260,11 @@ function FormApproval(props) {
                 </div>
               )
             ) : (
-              <div> MOD</div>
+              <div className="card-footer row">
+                <p className="lead m-2 text-center mb-3">
+                  Your approval is currently not requested.
+                </p>
+              </div>
             )}
           </form>
         </div>

@@ -67,6 +67,12 @@ class UserService {
     });
   }
 
+  updateDepartment(body) {
+    return axios.post(API_URL + "updatedepartment", body, {
+      headers: authHeader(),
+    });
+  }
+
   createForm(body) {
     return axios.post(API_URL + "createform", body, { headers: authHeader() });
   }

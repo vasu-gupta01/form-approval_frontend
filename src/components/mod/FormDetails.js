@@ -11,11 +11,17 @@ function FormDetails(props) {
 
   const [name, setName] = useState("");
   const [fields, setFields] = useState({});
-  const [final_approvers, setFinalApprovers] = useState([]);
 
   const [clicked_create, setClickedCreate] = useState(false);
   const [error, setError] = useState(false);
   const [missingField, setMissingField] = useState(false);
+
+  const [level_one, setLevelOne] = useState(1);
+  const [level_two, setLevelTwo] = useState(2);
+  const [level_three, setLevelThree] = useState(3);
+
+  const [final_approvers, setFinalApprovers] = useState({});
+  const [list_of_approvers, setListOfApprovers] = useState([]);
 
   useEffect(() => {
     UserService.getFieldTypes().then((res) => {
@@ -27,6 +33,57 @@ function FormDetails(props) {
     for (let field of form.fields) {
       new_fields[field._id] = field;
     }
+    form.stages[1].map((s) => {
+      if (s === 1) {
+        setLevelOne(1);
+      }
+      if (s === 2) {
+        setLevelTwo(1);
+      }
+      if (s == 3) {
+        setLevelThree(1);
+      }
+    });
+    form.stages[2].map((s) => {
+      if (s === 1) {
+        setLevelOne(2);
+      }
+      if (s === 2) {
+        setLevelTwo(2);
+      }
+      if (s == 3) {
+        setLevelThree(2);
+      }
+    });
+    form.stages[3].map((s) => {
+      if (s === 1) {
+        setLevelOne(3);
+      }
+      if (s === 2) {
+        setLevelTwo(3);
+      }
+      if (s == 3) {
+        setLevelThree(3);
+      }
+    });
+
+    UserService.getApprovers().then((resp) => {
+      if (resp.data) {
+        let approvers = {};
+
+        resp.data.map((approver) => {
+          approvers[approver._id] = false;
+        });
+
+        form.finals.map((f) => {
+          approvers[f._id] = true;
+        });
+
+        setFinalApprovers(approvers);
+        setListOfApprovers(resp.data);
+      }
+    });
+
     setFields(new_fields);
     setName(form.name);
   }, []);
@@ -94,10 +151,17 @@ function FormDetails(props) {
     } else {
       setMissingField(false);
 
+      let stages = { 1: [], 2: [], 3: [] };
+
+      stages[level_one].push(1);
+      stages[level_two].push(2);
+      stages[level_three].push(3);
+
       const body = {
         id: form._id,
         name: name,
         fields: fields_array,
+        stages: stages,
       };
 
       UserService.updateForm(body).then(
@@ -110,6 +174,15 @@ function FormDetails(props) {
         }
       );
     }
+  };
+
+  let handleAddFinalApprover = (e, id) => {
+    let current_approvers = final_approvers;
+    console.log(current_approvers);
+    const value = !current_approvers[id];
+    current_approvers[id] = value;
+    console.log(current_approvers);
+    setFinalApprovers(current_approvers);
   };
 
   return (
@@ -126,8 +199,11 @@ function FormDetails(props) {
         </div>
         <div className="card-body">
           <div className="mb-3 row">
-            <label className="col-sm-4 col-form-label">Name:</label>
-            <div className="col-sm-8">
+            <div className="col-4 m-auto">
+              <strong>Name:</strong>
+            </div>
+
+            <div className="col-8">
               <input
                 type="text"
                 className="form-control"
@@ -156,6 +232,63 @@ function FormDetails(props) {
               </button>
             </div>
           </div>
+
+          <div className="mb-3 row">
+            <strong className="col-5 ">Select stages of approval:</strong>
+            <div className="mb-3 row text-center m-1">
+              <div className="col-6 text-start mb-2">
+                <label className="form-check-label" htmlFor="flexCheckDefault">
+                  Access Level 1 - Department Only
+                </label>
+                <select
+                  value={level_one}
+                  className="form-select"
+                  onChange={(e) => {
+                    setLevelOne(e.target.value);
+                  }}
+                >
+                  <option selected value="1">
+                    First Stage
+                  </option>
+                  <option value="2">Second Stage</option>
+                  <option value="3">Third Stage</option>
+                </select>
+              </div>
+              <div className="col-6 text-start mb-2">
+                <label className="form-check-label" htmlFor="flexCheckDefault">
+                  Access Level 2 - All Approvals
+                </label>
+                <select
+                  value={level_two}
+                  className="form-select"
+                  onChange={(e) => {
+                    setLevelTwo(e.target.value);
+                  }}
+                >
+                  <option value="1">First Stage</option>
+                  <option value="2">Second Stage</option>
+                  <option value="3">Third Stage</option>
+                </select>
+              </div>
+              <div className="col-6 text-start">
+                <label className="form-check-label" htmlFor="flexCheckDefault">
+                  Level 3 - All Approvals
+                </label>
+                <select
+                  value={level_three}
+                  className="form-select"
+                  onChange={(e) => {
+                    setLevelThree(e.target.value);
+                  }}
+                >
+                  <option value="1">First Stage</option>
+                  <option value="2">Second Stage</option>
+                  <option value="3">Third Stage</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
           {error ? (
             <strong className="text-danger mt-2">
               Error submitting request. Check connection.
@@ -177,7 +310,7 @@ function FormDetails(props) {
               {clicked_create ? (
                 <button className="btn btn-primary" type="button" disabled>
                   <span
-                    class="spinner-border spinner-border-sm"
+                    className="spinner-border spinner-border-sm"
                     role="status"
                     aria-hidden="true"
                   ></span>
@@ -204,7 +337,10 @@ function FormFieldsEdit(props) {
 
   return (
     <div className="mb-3 row">
-      <label className="col-sm-2 col-form-label">Fields:</label>{" "}
+      <div className="col-12 m-auto">
+        <strong>Fields:</strong>
+      </div>
+
       {Object.keys(fields).map((id) => {
         return (
           <div className="row m-1 form-text">

@@ -9,9 +9,6 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-      <Switch>
-        <Route exact path="/dashboard" component={() => <Dashboard />}></Route>
-      </Switch>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

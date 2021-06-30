@@ -18,6 +18,7 @@ import RoleDetails from "./mod/RoleDetails";
 import ManageForms from "./mod/ManageForms";
 import FormDetails from "./mod/FormDetails";
 import FormCreate from "./mod/FormCreate";
+import Dashboard from "./Dashboard";
 
 class Home extends Component {
   constructor(props) {
@@ -74,35 +75,6 @@ class Home extends Component {
 
     return (
       <div>
-        <div className="container-fluid">
-          <nav className="row navbar navbar-light bg-dark rounded shadow-lg">
-            <div className="col-4">
-              <p className="navbar-brand text-light mt-1">
-                Welcome, {AuthService.getCurrentUser().firstname}!
-              </p>
-            </div>
-            <div className="col text-end">
-              <Link className="btn btn-outline-light" to="/">
-                Home
-              </Link>
-              <Link to="/mod/users" className="btn btn-outline-info ms-2">
-                Manage Approvers
-              </Link>
-              <Link to="/mod/forms" className="btn btn-outline-info ms-2">
-                Manage Forms
-              </Link>
-              <button
-                className="btn btn-outline-danger ms-2"
-                onClick={() => {
-                  AuthService.logout();
-                  window.location.replace("/");
-                }}
-              >
-                Logout
-              </button>
-            </div>
-          </nav>
-        </div>
         <div className="d-flex align-items-center justify-content-center">
           <Switch>
             <Route
