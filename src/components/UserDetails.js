@@ -11,6 +11,7 @@ function UserDetails(props) {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [clicked_create, setClickedCreate] = useState(false);
@@ -26,6 +27,7 @@ function UserDetails(props) {
     setFirstname(user.firstname);
     setLastname(user.lastname);
     setUsername(user.username);
+    setEmail(user.email);
     setRole(user.role._id);
   }, []);
 
@@ -46,6 +48,7 @@ function UserDetails(props) {
           firstname: firstname,
           lastname: lastname,
           role: role,
+          email: email,
         };
       } else {
         body = {
@@ -55,6 +58,7 @@ function UserDetails(props) {
           lastname: lastname,
           role: role,
           password: password,
+          email: email,
         };
       }
 
@@ -148,7 +152,19 @@ function UserDetails(props) {
               </div>
             </div>
           )}
-
+          <div className="mb-3 row">
+            <label className="col-sm-4 col-form-label">Email:</label>
+            <div className="col-sm-8">
+              <input
+                type="text"
+                className="form-control"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </div>
+          </div>
           <div className="mb-3 row">
             <label className="col-sm-4 col-form-label">New Password:</label>
             <div

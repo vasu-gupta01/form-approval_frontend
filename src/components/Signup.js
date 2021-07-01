@@ -15,6 +15,7 @@ class Signup extends Component {
       role: "",
       firstname: "",
       lastname: "",
+      email: "",
       invalidLogin: false,
       roles: [],
     };
@@ -48,7 +49,8 @@ class Signup extends Component {
       this.state.firstname,
       this.state.lastname,
       this.state.role,
-      this.state.password
+      this.state.password,
+      this.state.email
     ).then(
       () => {
         window.location.replace("users");
@@ -135,6 +137,16 @@ class Signup extends Component {
                     );
                   })}
                 </select>
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <label className="col-sm-4 col-form-label">Email:</label>
+              <div className="col-sm-8">
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={(e) => this.handleChange(e, "email")}
+                />
               </div>
             </div>
           </div>
