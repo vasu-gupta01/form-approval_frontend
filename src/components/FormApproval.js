@@ -7,6 +7,7 @@ import Loading from "./Loading";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import { useHistory } from "react-router-dom";
+import logo from "../images/Beta-HealthcareLG-Trebuchet-MS-font.png";
 
 function FormApproval(props) {
   //   constructor(props) {
@@ -21,6 +22,10 @@ function FormApproval(props) {
   const [formApproved, setFormApproved] = useState(false);
   const [formStatus, setFormStatus] = useState(0);
   const [formComments, setFormComments] = useState("");
+
+  const [clickedApprove, setClickedApprove] = useState(false);
+  const [clickedDisapprove, setClickedDisapprove] = useState(false);
+  const [appError, setAppError] = useState(false);
 
   useEffect(
     () => {
@@ -81,6 +86,8 @@ function FormApproval(props) {
 
   function handleApproval(e) {
     e.preventDefault();
+    setClickedApprove(true);
+    setAppError(false);
     const body = {
       request_id: id,
       approver: AuthService.getCurrentUser().id,
@@ -88,14 +95,21 @@ function FormApproval(props) {
       comments: formComments,
     };
 
-    UserService.updateApproval(body).then(() => {
-      setFormApproved(true);
-      setFormStatus(1);
-    });
+    UserService.updateApproval(body)
+      .then(() => {
+        setFormApproved(true);
+        setFormStatus(1);
+      })
+      .catch((e) => {
+        setClickedApprove(false);
+        setAppError(true);
+      });
   }
 
   function handleDisapproval(e) {
     e.preventDefault();
+    setClickedDisapprove(true);
+    setAppError(false);
     const body = {
       request_id: id,
       approver: AuthService.getCurrentUser().id,
@@ -105,10 +119,15 @@ function FormApproval(props) {
 
     console.log(body);
 
-    UserService.updateApproval(body).then(() => {
-      setFormApproved(true);
-      setFormStatus(2);
-    });
+    UserService.updateApproval(body)
+      .then(() => {
+        setFormApproved(true);
+        setFormStatus(2);
+      })
+      .catch((e) => {
+        setClickedDisapprove(false);
+        setAppError(true);
+      });
   }
 
   function handleComments(e) {
@@ -122,6 +141,9 @@ function FormApproval(props) {
       <div className="container d-flex align-items-center justify-content-center mt-5">
         <div className="container-form">
           <form className="card bg-light bg-gradient">
+            <div className="row card-body">
+              <img src={logo} className="img-fluid" alt="logo"></img>
+            </div>
             <div className="card-header">
               <div className="card-title">
                 <h2 className="text-center">
@@ -143,8 +165,8 @@ function FormApproval(props) {
                   />
                 </div>
               </div>
-              {/* <div className="mb-3 row">
-                <label className="col-sm-4 col-form-label">Department</label>
+              <div className="mb-3 row">
+                <label className="col-sm-4 col-form-label">Department:</label>
                 <div className="col-sm-8">
                   <input
                     type="text"
@@ -153,7 +175,7 @@ function FormApproval(props) {
                     readOnly
                   />
                 </div>
-              </div> */}
+              </div>
               {formData.fields.map((field) => {
                 return (
                   <div key={"div_" + field._id} className="mb-3 row">
@@ -241,21 +263,70 @@ function FormApproval(props) {
 
                   <div className="row">
                     <div className="col-6 text-left">
-                      <button
+                      {/* <button
                         className="btn btn-outline-danger"
                         onClick={handleDisapproval}
                       >
                         Disapprove
-                      </button>
+                      </button> */}
+                      {clickedDisapprove ? (
+                        <button
+                          className="btn btn-danger"
+                          type="button"
+                          disabled
+                        >
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                          Loading...
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-outline-danger"
+                          onClick={handleDisapproval}
+                        >
+                          Disapprove
+                        </button>
+                      )}
                     </div>
                     <div className="col-6 text-end">
-                      <button
+                      {/* <button
                         className="btn btn-outline-success"
                         onClick={handleApproval}
                       >
                         Approve
-                      </button>
+                      </button> */}
+                      {clickedApprove ? (
+                        <button
+                          className="btn btn-success"
+                          type="button"
+                          disabled
+                        >
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                          Loading...
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-outline-success"
+                          onClick={handleApproval}
+                        >
+                          Approve
+                        </button>
+                      )}
                     </div>
+                    {appError ? (
+                      <div className="col-12 text-center text-danger">
+                        <strong>An error occured. Please try again.</strong>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               )

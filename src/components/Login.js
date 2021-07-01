@@ -13,6 +13,7 @@ class Login extends Component {
       password: "",
       message: "",
       invalidLogin: false,
+      clicked_login: false,
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -35,13 +36,15 @@ class Login extends Component {
 
   handleLogin(e) {
     e.preventDefault();
-
+    this.setState({ clicked_login: true });
     AuthService.login(this.state.username, this.state.password).then(
       () => {
         // this.props.history.push("/home");
+        this.setState({ clicked_login: false });
         window.location.reload();
       },
       (error) => {
+        this.setState({ clicked_login: false });
         this.setState({ invalidLogin: true });
       }
     );
@@ -88,7 +91,18 @@ class Login extends Component {
             </div>
             {/* {this.state.invalidLogin ? "Invalid Login" : ""} */}
             <div className="card-footer text-end">
-              <button className="btn btn-primary">Login</button>
+              {this.state.clicked_login ? (
+                <button className="btn btn-primary" type="button" disabled>
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Loading...
+                </button>
+              ) : (
+                <button className="btn btn-outline-primary">Login</button>
+              )}
             </div>
           </form>
           <FormResult

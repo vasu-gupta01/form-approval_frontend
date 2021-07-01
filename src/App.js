@@ -60,7 +60,7 @@ class App extends Component {
                   Status Dashboard
                 </Link>
                 <Link to="/mod/users" className="btn btn-outline-info ms-2">
-                  Manage Approvers
+                  Manage Users
                 </Link>
                 <Link to="/mod/forms" className="btn btn-outline-info ms-2">
                   Manage Forms
@@ -171,6 +171,8 @@ class App extends Component {
           </div>
         </div>
       );
+    } else {
+      AuthService.logout();
     }
   }
 }

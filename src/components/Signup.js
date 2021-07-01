@@ -73,7 +73,7 @@ class Signup extends Component {
         >
           <div className="card-header">
             <div className="card-title">
-              <h2 className="text-center">Create new approver</h2>
+              <h2 className="text-center">Create new user</h2>
             </div>
           </div>
           <div className="card-body">

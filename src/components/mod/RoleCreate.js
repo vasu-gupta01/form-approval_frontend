@@ -78,7 +78,7 @@ class RoleCreate extends Component {
         >
           <div className="card-header">
             <div className="card-title">
-              <h2 className="text-center">Create new roles</h2>
+              <h2 className="text-center">Create new role</h2>
             </div>
           </div>
           <div className="card-body">
@@ -131,9 +131,11 @@ class RoleCreate extends Component {
                     -- access level --
                   </option>
                   <option value="0">level 0 -- only view</option>
-                  <option value="1">level 1 -- HOD</option>
-                  <option value="2">level 2 -- HR</option>
-                  <option value="3">level 3 -- HOD + Final</option>
+                  <option value="1">
+                    level 1 -- view/approve department only
+                  </option>
+                  <option value="2">level 2 -- view/approve all</option>
+                  <option value="3">level 3 -- view/approve all</option>
                 </select>
               </div>
             </div>

@@ -19,12 +19,12 @@ function ManageUsers(props) {
     <div className="mt-2">
       <div className="row mb-3">
         <div className="col-12 text-light">
-          <h4>Manage Approvers</h4>
+          <h4>Manage Users</h4>
         </div>
 
         <div className="col">
           <Link to="/mod/signup" className="btn btn-outline-light">
-            + Add approver
+            + Add User
           </Link>
         </div>
         <div className="col">

@@ -238,7 +238,7 @@ function FormDetails(props) {
             <div className="mb-3 row text-center m-1">
               <div className="col-6 text-start mb-2">
                 <label className="form-check-label" htmlFor="flexCheckDefault">
-                  Access Level 1 - Department Only
+                  Level 1 - view/approve department only
                 </label>
                 <select
                   value={level_one}
@@ -256,7 +256,7 @@ function FormDetails(props) {
               </div>
               <div className="col-6 text-start mb-2">
                 <label className="form-check-label" htmlFor="flexCheckDefault">
-                  Access Level 2 - All Approvals
+                  Level 2 - view/approve all
                 </label>
                 <select
                   value={level_two}
@@ -272,7 +272,7 @@ function FormDetails(props) {
               </div>
               <div className="col-6 text-start">
                 <label className="form-check-label" htmlFor="flexCheckDefault">
-                  Level 3 - All Approvals
+                  Level 3 - view/approve all
                 </label>
                 <select
                   value={level_three}

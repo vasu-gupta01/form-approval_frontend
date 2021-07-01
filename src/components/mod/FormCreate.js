@@ -238,7 +238,7 @@ class FormCreate extends Component {
                     className="form-check-label"
                     htmlFor="flexCheckDefault"
                   >
-                    Access Level 1 - Department Only
+                    Level 1 - view/approve only department
                   </label>
                   <select
                     value={this.state.level_one}
@@ -259,7 +259,7 @@ class FormCreate extends Component {
                     className="form-check-label"
                     htmlFor="flexCheckDefault"
                   >
-                    Access Level 2 - All Approvals
+                    Level 2 - view/approve all
                   </label>
                   <select
                     value={this.state.level_two}
@@ -278,7 +278,7 @@ class FormCreate extends Component {
                     className="form-check-label"
                     htmlFor="flexCheckDefault"
                   >
-                    Level 3 - All Approvals
+                    Level 3 - view/approve all
                   </label>
                   <select
                     value={this.state.level_three}
