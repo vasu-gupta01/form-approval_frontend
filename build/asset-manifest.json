@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/static/css/main.03f633f7.chunk.css",
-    "main.js": "/static/js/main.d47e0b8a.chunk.js",
-    "main.js.map": "/static/js/main.d47e0b8a.chunk.js.map",
+    "main.js": "/static/js/main.ea254b7e.chunk.js",
+    "main.js.map": "/static/js/main.ea254b7e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.957a390f.js",
     "runtime-main.js.map": "/static/js/runtime-main.957a390f.js.map",
     "static/css/2.33b9e26e.chunk.css": "/static/css/2.33b9e26e.chunk.css",
-    "static/js/2.bbc302bf.chunk.js": "/static/js/2.bbc302bf.chunk.js",
-    "static/js/2.bbc302bf.chunk.js.map": "/static/js/2.bbc302bf.chunk.js.map",
+    "static/js/2.e6ad6099.chunk.js": "/static/js/2.e6ad6099.chunk.js",
+    "static/js/2.e6ad6099.chunk.js.map": "/static/js/2.e6ad6099.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.33b9e26e.chunk.css.map": "/static/css/2.33b9e26e.chunk.css.map",
     "static/css/main.03f633f7.chunk.css.map": "/static/css/main.03f633f7.chunk.css.map",
-    "static/js/2.bbc302bf.chunk.js.LICENSE.txt": "/static/js/2.bbc302bf.chunk.js.LICENSE.txt",
+    "static/js/2.e6ad6099.chunk.js.LICENSE.txt": "/static/js/2.e6ad6099.chunk.js.LICENSE.txt",
     "static/media/Beta-HealthcareLG-Trebuchet-MS-font.4688ae12.png": "/static/media/Beta-HealthcareLG-Trebuchet-MS-font.4688ae12.png"
   },
   "entrypoints": [
     "static/js/runtime-main.957a390f.js",
     "static/css/2.33b9e26e.chunk.css",
-    "static/js/2.bbc302bf.chunk.js",
+    "static/js/2.e6ad6099.chunk.js",
     "static/css/main.03f633f7.chunk.css",
-    "static/js/main.d47e0b8a.chunk.js"
+    "static/js/main.ea254b7e.chunk.js"
   ]
 }

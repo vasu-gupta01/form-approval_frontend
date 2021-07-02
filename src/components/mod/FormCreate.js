@@ -16,9 +16,12 @@ class FormCreate extends Component {
       final_approvers: {},
       list_of_approvers: [],
       counter: 0,
+      counter_viewer: 0,
       level_one: 1,
       level_two: 2,
       level_three: 3,
+      viewer_fields: {},
+      fieldViewerTypes: [],
     };
 
     this.handleCreate = this.handleCreate.bind(this);
@@ -27,6 +30,14 @@ class FormCreate extends Component {
     this.handleFieldNameChange = this.handleFieldNameChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+
+    this.handleViewerFieldTypeChange =
+      this.handleViewerFieldTypeChange.bind(this);
+    this.handleViewerFieldNameChange =
+      this.handleViewerFieldNameChange.bind(this);
+    this.handleViewerFieldDelete = this.handleViewerFieldDelete.bind(this);
+    this.handleViewerAdd = this.handleViewerAdd.bind(this);
+
     this.handleAddFinalApprover = this.handleAddFinalApprover.bind(this);
   }
 
@@ -35,6 +46,13 @@ class FormCreate extends Component {
       if (res.data) {
         console.log(res.data);
         this.setState({ fieldTypes: res.data });
+      }
+    });
+
+    UserService.getFieldViewerTypes().then((res) => {
+      if (res.data) {
+        console.log(res.data);
+        this.setState({ fieldViewerTypes: res.data });
       }
     });
 
@@ -96,6 +114,49 @@ class FormCreate extends Component {
     // setFields({ ...fields, new_field });
   };
 
+  handleViewerFieldTypeChange = (e, field_id) => {
+    let current_fields = this.state.viewer_fields;
+    current_fields[field_id].type = e.target.value;
+    this.setState({ viewer_fields: current_fields });
+    // setFields({ ...fields });
+  };
+
+  handleViewerFieldNameChange = (e, field_id) => {
+    let current_fields = this.state.viewer_fields;
+    current_fields[field_id].name = e.target.value;
+    this.setState({ viewer_fields: current_fields });
+    // setFields({ ...fields });
+  };
+
+  handleViewerFieldDelete = (e, field_id) => {
+    e.preventDefault();
+    let current_fields = this.state.viewer_fields;
+    const count = this.state.counter_viewer;
+
+    delete current_fields[field_id];
+
+    this.setState({ viewer_fields: current_fields });
+    this.setState({ counter_viewer: count - 1 });
+    // setFields({ ...fields });
+  };
+
+  handleViewerAdd = (e) => {
+    e.preventDefault();
+    let current_fields = this.state.viewer_fields;
+    const count = this.state.counter_viewer;
+
+    current_fields[count] = {
+      name: "",
+      type: "",
+    };
+
+    console.log(current_fields);
+
+    this.setState({ viewer_fields: current_fields });
+    this.setState({ counter_viewer: count + 1 });
+    // setFields({ ...fields, new_field });
+  };
+
   handleRequiredChange = (e, field_id) => {
     let current_fields = this.state.fields;
     const value = !current_fields[field_id].required;
@@ -118,6 +179,7 @@ class FormCreate extends Component {
 
     const nm = this.state.name;
     const fields = this.state.fields;
+    const viewer_fields = this.state.viewer_fields;
 
     let fields_array = [];
     let fields_error = false;
@@ -128,6 +190,16 @@ class FormCreate extends Component {
         fields_error = true;
       }
       fields_array.push(fields[f]);
+    });
+
+    let viewer_fields_array = [];
+
+    Object.keys(viewer_fields).map((f) => {
+      if (viewer_fields[f].name === "" || viewer_fields[f].type === "") {
+        console.log("found error!");
+        fields_error = true;
+      }
+      viewer_fields_array.push(viewer_fields[f]);
     });
 
     if (nm === "" || fields_error) {
@@ -155,6 +227,7 @@ class FormCreate extends Component {
         fields: fields_array,
         finals: approvers_array,
         stages: stages,
+        viewer_fields: viewer_fields_array,
       }).then(
         () => {
           this.setState({ clicked_create: false });
@@ -188,6 +261,7 @@ class FormCreate extends Component {
         <form
           className="card bg-light bg-gradient"
           onSubmit={this.handleCreate}
+          autoComplete="off"
         >
           <div className="card-header">
             <div className="card-title">
@@ -323,6 +397,69 @@ class FormCreate extends Component {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="mb-3 row m-auto">
+              <strong className="col-12 ">Viewer Fields:</strong>
+              {Object.keys(this.state.viewer_fields).map((id) => {
+                return (
+                  <div className="row m-1 form-text">
+                    <div className="form-floating col-5 mb-1 ps-1">
+                      <input
+                        className="form-control"
+                        type="text"
+                        value={this.state.viewer_fields[id].name}
+                        onChange={(e) =>
+                          this.handleViewerFieldNameChange(e, id)
+                        }
+                        placeholder="Field Name"
+                        id="inputFieldName"
+                      />
+                      <label htmlFor="inputFieldName">Field Name</label>
+                    </div>
+                    <div className="form-floating col-3 mb-1 ps-1">
+                      <select
+                        className="form-select"
+                        type="text"
+                        value={this.state.viewer_fields[id].type}
+                        onChange={(e) =>
+                          this.handleViewerFieldTypeChange(e, id)
+                        }
+                        id="selectFieldTypes"
+                      >
+                        <option value=""></option>
+                        {this.state.fieldViewerTypes.map((field_type) => {
+                          return (
+                            <option key={field_type._id} value={field_type._id}>
+                              {" "}
+                              {field_type.name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <label htmlFor="selectFieldTypes">Field Type</label>
+                    </div>
+                    <div className="col-2 m-auto text-end">
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={(e) => this.handleViewerFieldDelete(e, id)}
+                      >
+                        x
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="mb-3 row text-center">
+                <div className="col-12">
+                  <button
+                    className="btn btn-outline-success btn-sm"
+                    onClick={this.handleViewerAdd}
+                  >
+                    + Add Field
+                  </button>
+                </div>
+              </div>
             </div>
 
             {this.state.error ? (

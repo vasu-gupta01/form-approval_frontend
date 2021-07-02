@@ -55,6 +55,14 @@ class UserService {
     });
   }
 
+  updateRequestViewerFields(body) {
+    return axios.post(API_URL + "updaterequestviewerfields", body, {
+      headers: authHeader(),
+    });
+  }
+
+  updaterequestviewerfields;
+
   createRole(body) {
     return axios.post(API_URL + "createrole", body, {
       headers: authHeader(),
@@ -89,6 +97,18 @@ class UserService {
 
   getFieldTypes() {
     return axios.get(API_URL + "getfieldtypes", { headers: authHeader() });
+  }
+
+  getFieldViewerTypes() {
+    return axios.get(API_URL + "getviewerfieldtypes", {
+      headers: authHeader(),
+    });
+  }
+
+  getViewerfields(body) {
+    return axios.post(API_URL + "getviewerfields", body, {
+      headers: authHeader(),
+    });
   }
 
   updateForm(body) {

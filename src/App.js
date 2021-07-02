@@ -11,6 +11,7 @@ import FormApproval from "./components/FormApproval";
 import Login from "./components/Login";
 import Loading from "./components/Loading";
 import Dashboard from "./components/Dashboard";
+import FormView from "./components/FormView";
 
 class App extends Component {
   constructor(props) {
@@ -110,7 +111,7 @@ class App extends Component {
                   className="btn btn-outline-danger ms-2"
                   onClick={() => {
                     AuthService.logout();
-                    window.location.reload();
+                    window.location.replace("/");
                   }}
                 >
                   Logout
@@ -121,6 +122,11 @@ class App extends Component {
           <div className="container align-items-center justify-content-center">
             <Switch>
               <Route exact path="/" component={() => <Dashboard />}></Route>
+              <Route
+                exact
+                path="/viewform/:id"
+                component={() => <FormView />}
+              />
             </Switch>
           </div>
         </div>

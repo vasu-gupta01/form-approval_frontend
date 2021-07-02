@@ -252,9 +252,9 @@ function createExcelData(forms) {
     let dis = [];
     for (let a of f.approval) {
       if (a.status === 1) {
-        app.push(a.approver.firstname);
+        app.push(" " + a.approver.firstname + " " + a.approver.lastname);
       } else if (a.status === 2) {
-        dis.push(a.approver.firstname);
+        dis.push(" " + a.approver.firstname + " " + a.approver.lastname);
       }
     }
 
@@ -265,6 +265,38 @@ function createExcelData(forms) {
       "Dissaproved By": "".concat(dis),
       "Date Filled": Moment(f.date_submitted).format("DD/MM/YYYY - h:mm A"),
     };
+
+    if (f.viewer_fields && f.viewer_fields.length >= 0) {
+      f.viewer_fields.map((vf) => {
+        if (vf.type.name === "button-time") {
+          obj[vf.name] = Moment(vf.value).format("DD/MM/YYYY - h:mm A");
+        } else {
+          obj[vf.name] = vf.value;
+        }
+      });
+    }
+
+    if (f.fields && f.fields.length >= 0) {
+      f.fields.map((vf) => {
+        if (vf.type.name === "time") {
+          obj[vf.name] = Moment(vf.value).format("DD/MM/YYYY - h:mm A");
+        } else {
+          obj[vf.name] = vf.value;
+        }
+      });
+    }
+
+    if (f.final_approval === 1) {
+      obj["Final Approval Status"] = "Approved -- ".concat(
+        Moment(f.approval_date).format("DD/MM/YYYY - h:mm A")
+      );
+    } else if (f.final_approval === 2) {
+      obj["Final Approval Status"] = "Not Approved -- ".concat(
+        Moment(f.approval_date).format("DD/MM/YYYY - h:mm A")
+      );
+    } else if (f.final_approval === 0) {
+      obj["Final Approval Status"] = "Pending";
+    }
 
     return_data.push(obj);
   }

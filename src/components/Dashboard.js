@@ -211,6 +211,24 @@ function ApprovalRequestsDisplay(props) {
                         </h4>
                       )}
                     </div>
+
+                    <div className="card-text g-4">
+                      {AuthService.getCurrentUser().role.level === 0 ? (
+                        <div className="row">
+                          <hr className="m-0 mb-2 p-0"></hr>
+                          <div className="col-auto">
+                            <Link
+                              to={"/viewform/" + form._id}
+                              className="btn btn-primary btn-sm"
+                            >
+                              view
+                            </Link>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
